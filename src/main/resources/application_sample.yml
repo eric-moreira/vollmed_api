@@ -1,0 +1,14 @@
+spring:
+  datasource:
+    username: postgres
+    password: {senha_do_banco}
+    url: jdbc:postgresql://localhost:5432/
+
+flyway:
+    url: jdbc:postgresql://localhost:5432/
+    user: postgres
+    password: {senha_do_banco}
+    schemas: {nome_do_banco}
+    locations: classpath:db/migration
+    baselineOnMigrate: true
+    
