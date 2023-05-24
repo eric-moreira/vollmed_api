@@ -13,7 +13,7 @@ String nome,
 @NotBlank @Email 
 String email, 
 
-@NotBlank @Pattern(regexp = "\\d{11}")
+@NotBlank @Pattern(regexp = "\\d{3}\\.?\\d{3}\\.?\\d{3}-?\\d{2")
 String cpf, 
 
 @NotNull
