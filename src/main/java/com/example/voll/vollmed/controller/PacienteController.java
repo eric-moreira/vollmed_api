@@ -9,13 +9,17 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 
 import com.example.voll.vollmed.records.DadosCadastroPaciente;
 
+import jakarta.transaction.Transactional;
+import jakarta.validation.Valid;
+
 @Controller
 @RequestMapping("/api/pacientes")
 public class PacienteController {
     
     @PostMapping("/cadastro")
     @ResponseStatus(HttpStatus.CREATED)
-    public void cadastrarPaciente(@RequestBody DadosCadastroPaciente dados) {
+    @Transactional
+    public void cadastrarPaciente(@RequestBody @Valid DadosCadastroPaciente dados) {
         System.out.println(dados);
     }
 }
