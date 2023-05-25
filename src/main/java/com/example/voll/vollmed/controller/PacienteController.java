@@ -1,8 +1,12 @@
 package com.example.voll.vollmed.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 
 import com.example.voll.vollmed.models.Paciente;
 import com.example.voll.vollmed.records.DadosCadastroPaciente;
+import com.example.voll.vollmed.records.DadosListagemPaciente;
 import com.example.voll.vollmed.repository.PacienteRepository;
 
 import jakarta.transaction.Transactional;
@@ -28,4 +33,11 @@ public class PacienteController {
     public void cadastrarPaciente(@RequestBody @Valid DadosCadastroPaciente dados) {
         pacienteRepository.save(new Paciente(dados));
     }
+
+    @GetMapping("/listar")
+    public Page<DadosListagemPaciente> listarMedicos(@PageableDefault(size = 10, sort = {"nome"}) Pageable pageable)  {
+        return pacienteRepository.findAll(pageable).map(DadosListagemPaciente::new);
+
+    }
+
 }
