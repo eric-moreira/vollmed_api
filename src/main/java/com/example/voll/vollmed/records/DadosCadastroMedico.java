@@ -5,6 +5,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 
+
 public record DadosCadastroMedico(
     
     @NotBlank
@@ -25,4 +26,9 @@ public record DadosCadastroMedico(
     Especialidade especialidade, 
     
     @NotNull
-    DadosEndereco endereco) {}
+    DadosEndereco endereco) {
+
+        public DadosCadastroMedico(String nome, String email, String telefone, String crm, String string, DadosEndereco endereco){
+           this(nome, email, telefone, crm, Especialidade.valueOf(string), endereco);
+        }
+    }
