@@ -38,6 +38,7 @@ public class PacienteController {
     }
 
     @GetMapping("/listar")
+    @ResponseStatus(HttpStatus.OK)
     public Page<DadosListagemPaciente> listarMedicos(@PageableDefault(size = 10, sort = {"nome"}) Pageable pageable)  {
         return pacienteRepository.findAll(pageable).map(DadosListagemPaciente::new);
 
@@ -45,6 +46,7 @@ public class PacienteController {
 
     @PutMapping("/update")
     @Transactional
+    
     public void updatePaciente(@RequestBody @Valid DadosUpdatePaciente dados) {
         Paciente paciente = pacienteRepository.findById(dados.id()).orElseThrow();
         paciente.update(dados);

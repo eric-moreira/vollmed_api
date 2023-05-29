@@ -6,11 +6,8 @@ public record DadosUpdateMedico(
     @NotNull
     Long id,
     String nome,
-    DadosEndereco endereco,
-    String telefone
+    String telefone,
+    DadosEndereco endereco
 ) {
 
-    public DadosUpdateMedico(long l, String string, String string2, DadosEndereco dadosEndereco) {
-        this(l, string, dadosEndereco, string2);
-    }
 }
