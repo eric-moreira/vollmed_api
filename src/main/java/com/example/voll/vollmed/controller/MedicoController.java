@@ -44,7 +44,7 @@ public class MedicoController {
         return ResponseEntity.created(uri).body(new DadosDetalhamentoMedico(medico));
     }
 
-    @GetMapping("/listar")
+    @GetMapping("/get")
     @ResponseStatus(HttpStatus.OK)
     public Page<DadosListagemMedico> listarMedicos(@PageableDefault(size = 10, sort = {"nome"}) Pageable pageable)  {
         return medicoRepository.findAll(pageable).map(DadosListagemMedico::new);
