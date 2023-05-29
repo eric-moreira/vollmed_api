@@ -1,7 +1,7 @@
 package com.example.voll.vollmed.records;
 
-import com.example.voll.vollmed.models.Endereco;
-import com.example.voll.vollmed.models.Medico;
+import com.example.voll.vollmed.domain.Endereco;
+import com.example.voll.vollmed.domain.Medico;
 
 public record DadosDetalhamentoMedico(
         Long id,

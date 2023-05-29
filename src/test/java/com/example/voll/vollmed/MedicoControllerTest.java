@@ -26,7 +26,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.hamcrest.Matchers.*;
 
 import com.example.voll.vollmed.controller.MedicoController;
-import com.example.voll.vollmed.models.Medico;
+import com.example.voll.vollmed.domain.Medico;
 import com.example.voll.vollmed.records.DadosCadastroMedico;
 import com.example.voll.vollmed.records.DadosEndereco;
 import com.example.voll.vollmed.records.DadosUpdateMedico;

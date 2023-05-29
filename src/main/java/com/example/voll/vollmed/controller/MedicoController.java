@@ -18,7 +18,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.example.voll.vollmed.models.Medico;
+import com.example.voll.vollmed.domain.Medico;
 import com.example.voll.vollmed.records.DadosCadastroMedico;
 import com.example.voll.vollmed.records.DadosDetalhamentoMedico;
 import com.example.voll.vollmed.records.DadosListagemMedico;
@@ -36,7 +36,8 @@ public class MedicoController {
 
     @PostMapping("/cadastro")
     @Transactional
-    public ResponseEntity<DadosDetalhamentoMedico> cadastrarMedico(@RequestBody @Valid DadosCadastroMedico dados, UriComponentsBuilder uriBuilder) {
+    public ResponseEntity<DadosDetalhamentoMedico> cadastrarMedico(@RequestBody @Valid DadosCadastroMedico dados, 
+            UriComponentsBuilder uriBuilder) {
         var medico = new Medico(dados);
         medicoRepository.save(medico);
         
@@ -67,5 +68,12 @@ public class MedicoController {
         Medico medico = medicoRepository.getReferenceById(id);
         medicoRepository.delete(medico);
 
+    }
+
+    @GetMapping("/get/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public DadosDetalhamentoMedico detalharMedico(@PathVariable Long id) {
+        Medico medico = medicoRepository.findById(id).orElseThrow();
+        return new DadosDetalhamentoMedico(medico);
     }
 }

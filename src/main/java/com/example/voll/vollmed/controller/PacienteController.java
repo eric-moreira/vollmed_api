@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import com.example.voll.vollmed.models.Paciente;
+import com.example.voll.vollmed.domain.Paciente;
 import com.example.voll.vollmed.records.DadosCadastroPaciente;
 import com.example.voll.vollmed.records.DadosDetalhamentoPaciente;
 import com.example.voll.vollmed.records.DadosListagemPaciente;
@@ -36,7 +36,9 @@ public class PacienteController {
     
     @PostMapping("/cadastro")
     @Transactional
-    public ResponseEntity<DadosDetalhamentoPaciente> cadastrarPaciente(@RequestBody @Valid DadosCadastroPaciente dados, UriComponentsBuilder uriBuilder) {
+    public ResponseEntity<DadosDetalhamentoPaciente> cadastrarPaciente(@RequestBody @Valid DadosCadastroPaciente dados,
+            UriComponentsBuilder uriBuilder) {
+
         var paciente = new Paciente(dados);
         pacienteRepository.save(paciente);
         var uri = uriBuilder.path("/api/pacientes/{id}").buildAndExpand(paciente.getId()).toUri();
@@ -67,6 +69,13 @@ public class PacienteController {
     public void deletePaciente(@PathVariable Long id) {
         Paciente paciente = pacienteRepository.findById(id).orElseThrow();
         pacienteRepository.delete(paciente);
+    }
+
+    @GetMapping("/get/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public DadosDetalhamentoPaciente detalharPaciente(@PathVariable Long id) {
+        Paciente paciente = pacienteRepository.findById(id).orElseThrow();
+        return new DadosDetalhamentoPaciente(paciente);
     }
 
 

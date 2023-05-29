@@ -1,4 +1,4 @@
-package com.example.voll.vollmed.models;
+package com.example.voll.vollmed.domain;
 
 import com.example.voll.vollmed.records.DadosEndereco;
 
